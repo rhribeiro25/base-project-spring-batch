@@ -26,12 +26,12 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/logs/create-by-batch",
+					"raw": "http://localhost:9090/logs/create-by-batch",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"logs",
 						"create-by-batch"
@@ -61,12 +61,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/logs/find-by-id/238770",
+					"raw": "http://localhost:9090/logs/find-by-id/238770",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"logs",
 						"find-by-id",
@@ -106,12 +106,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/logs/create",
+					"raw": "http://localhost:9090/logs/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"logs",
 						"create"
@@ -141,12 +141,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/logs/find-all",
+					"raw": "http://localhost:9090/logs/find-all",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"logs",
 						"find-all"
@@ -176,12 +176,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/logs/find-by-createdat-between/2020-01-01 00:00:11.763/2020-01-01 00:13:48.478",
+					"raw": "http://localhost:9090/logs/find-by-createdat-between/2020-01-01 00:00:11.763/2020-01-01 00:13:48.478",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"logs",
 						"find-by-createdat-between",
@@ -216,12 +216,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/logs/find-by-params/192.168.234.82",
+					"raw": "http://localhost:9090/logs/find-by-params/192.168.234.82",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"logs",
 						"find-by-params",
@@ -261,12 +261,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/logs/update",
+					"raw": "http://localhost:9090/logs/update",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"logs",
 						"update"
@@ -305,12 +305,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/logs/delete",
+					"raw": "http://localhost:9090/logs/delete",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9090",
 					"path": [
 						"logs",
 						"delete"
