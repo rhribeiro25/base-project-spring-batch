@@ -16,17 +16,12 @@ import java.nio.file.Paths;
 
 public class FileUtils {
 
-    public static void salvar(String path, String fileName, MultipartFile file) {
+    public static void salvar(String path, String fileName, MultipartFile file) throws IOException {
         Path dirPath = Paths.get(path);
         File newFile = new File(path + fileName);
-
-        try {
-            Files.createDirectories(dirPath);
-            FileOutputStream fos = new FileOutputStream(newFile);
-            fos.write(file.getBytes());
-            fos.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        }
+        Files.createDirectories(dirPath);
+        FileOutputStream fos = new FileOutputStream(newFile);
+        fos.write(file.getBytes());
+        fos.close();
     }
 }

@@ -6,6 +6,8 @@ import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,25 +17,29 @@ import java.util.List;
  */
 public interface LogService {
 
-    public List<LogEntity> findAll();
+    List<LogEntity> findAll();
 
-    public LogEntity findById(Long id);
+    LogEntity findById(Long id);
 
-    public LogEntity saveOrUpdate(LogEntity logModel);
+    LogEntity update(LogEntity logModel);
 
-    public void delete(Long id);
+    LogEntity create(LogEntity logModel);
 
-    public List<LogEntity> saveAll(List<? extends LogEntity> logs);
+    void delete(Long id);
 
-    public List<LogEntity> findByCreatedAtBetween(String from, String to);
+    List<LogEntity> saveAll(List<? extends LogEntity> logs);
 
-    public boolean existsById(Long id);
+    List<LogEntity> findByCreatedAtBetween(String from, String to);
 
-    public List<LogEntity> findByIp(String ip);
+    boolean existsById(Long id);
 
-    public BatchStatus runBatch(Long now, String logFullPath) throws JobExecutionAlreadyRunningException, JobRestartException,
+    List<LogEntity> findByIp(String ip);
+
+    String createByBatch(MultipartFile log, Long now);
+
+    BatchStatus runBatch(Long now, String logFullPath) throws JobExecutionAlreadyRunningException, JobRestartException,
             JobInstanceAlreadyCompleteException, JobParametersInvalidException;
 
-    public List<LogEntity> findByStatus(Integer status);
+    List<LogEntity> findByStatus(Integer status);
 
 }
