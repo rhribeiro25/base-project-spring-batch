@@ -2,6 +2,7 @@ package br.com.rhribeiro.baseprojectspringbatch.config.spring.batch;
 
 import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
 import br.com.rhribeiro.baseprojectspringbatch.utils.DateUtils;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  * @date 07/07/21
  */
 
+@Log4j2
 public class LogFieldSetMapper implements FieldSetMapper<LogEntity> {
 
     @Override
@@ -25,7 +27,7 @@ public class LogFieldSetMapper implements FieldSetMapper<LogEntity> {
             String userAgent = fieldSet.readString(4);
             logItem = new LogEntity(createdAt, ip, request, status, userAgent);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
         return logItem;
     }

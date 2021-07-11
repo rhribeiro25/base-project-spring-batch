@@ -1,5 +1,7 @@
 package br.com.rhribeiro.baseprojectspringbatch.utils;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,6 +11,7 @@ import java.util.Date;
  * @date 07/07/21
  */
 
+@Log4j2
 public class DateUtils {
 
     public static Date stringToDate_yyyy_MM_dd__HH_mm_ss(String date) {
@@ -17,7 +20,7 @@ public class DateUtils {
         try {
             formatted = formato.parse(date);
         } catch (ParseException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
         return formatted;
     }

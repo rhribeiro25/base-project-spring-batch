@@ -2,6 +2,7 @@ package br.com.rhribeiro.baseprojectspringbatch.config.spring.batch;
 
 import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
 import br.com.rhribeiro.baseprojectspringbatch.service.LogService;
+import br.com.rhribeiro.baseprojectspringbatch.error.exception.InternalServerErrorException;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,10 @@ public class LogItemWriter implements ItemWriter<LogEntity> {
     @Override
     public void write(List<? extends LogEntity> logs) throws Exception {
         System.out.println("Data Saved for logs: " + logs);
-        logService.saveAll(logs);
+        try {
+            logService.saveAll(logs);
+        } catch (InternalServerErrorException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,9 +1,10 @@
-package error.handler;
+package br.com.rhribeiro.baseprojectspringbatch.error.handler;
 
-import error.ErrorDetails;
-import error.ValidationErrorDetails;
-import error.exception.InternalServerErrorException;
-import error.exception.NotFoundException;
+import br.com.rhribeiro.baseprojectspringbatch.error.ErrorDetails;
+import br.com.rhribeiro.baseprojectspringbatch.error.ValidationErrorDetails;
+import br.com.rhribeiro.baseprojectspringbatch.error.exception.BadRequestErrorException;
+import br.com.rhribeiro.baseprojectspringbatch.error.exception.InternalServerErrorException;
+import br.com.rhribeiro.baseprojectspringbatch.error.exception.NotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author Renan Ribeiro
- * @date 11/07/21
+ * @date 11/07/2021
  */
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -37,10 +38,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         ErrorDetails errorDetails = ErrorDetails.builder()
                 .status(HttpStatus.BAD_REQUEST.name())
-                .code(HttpStatus.BAD_REQUEST.value())
+                .statusCode(HttpStatus.BAD_REQUEST.value())
                 .message("Arguments are not valid")
                 .timesTamp(new Date().getTime())
-                .objectName(ex.getClass().getName())
                 .params(mapValErrors)
                 .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
@@ -50,10 +50,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> handlerNotFoundException(NotFoundException ex) {
         ErrorDetails errorDetails = ErrorDetails.builder()
                 .status(HttpStatus.NOT_FOUND.name())
-                .code(HttpStatus.NOT_FOUND.value())
+                .statusCode(HttpStatus.NOT_FOUND.value())
                 .message(ex.getMessage())
                 .timesTamp(new Date().getTime())
-                .objectName(ex.getClass().getName())
                 .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
@@ -62,12 +61,22 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> handlerInternalServerErrorException(InternalServerErrorException ex) {
         ErrorDetails errorDetails = ErrorDetails.builder()
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.name())
-                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .message(ex.getMessage())
                 .timesTamp(new Date().getTime())
-                .objectName(ex.getClass().getName())
                 .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(BadRequestErrorException.class)
+    public ResponseEntity<?> handlerBadRequestErrorException(BadRequestErrorException ex) {
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .status(HttpStatus.BAD_REQUEST.name())
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .message(ex.getMessage())
+                .timesTamp(new Date().getTime())
+                .build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
 }

@@ -1,5 +1,6 @@
-package error;
+package br.com.rhribeiro.baseprojectspringbatch.error;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -8,17 +9,22 @@ import java.util.Map;
 
 /**
  * @author Renan Ribeiro
- * @date 11/07/21
+ * @date 11/07/2021
  */
 
 @Builder
 @Getter
 public class ErrorDetails implements Serializable {
+
+    private final int statusCode;
+
     private final String status;
-    private final int code;
-    private final String message;
+
     private final Long timesTamp;
-    private final String objectName;
+
+    private final String message;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private final Map<String, ValidationErrorDetails> params;
 }
 

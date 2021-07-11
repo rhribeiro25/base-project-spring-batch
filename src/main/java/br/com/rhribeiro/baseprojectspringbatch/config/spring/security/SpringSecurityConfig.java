@@ -30,7 +30,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/logs/**").authorizeRequests().anyRequest().hasRole("USER").and().httpBasic().and().csrf()
+        http.antMatcher("/api/logs/**").authorizeRequests().anyRequest().hasRole("USER").and().httpBasic().and().csrf()
                 .disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
