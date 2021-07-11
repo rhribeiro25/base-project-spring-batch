@@ -1,4 +1,4 @@
-package br.com.rhribeiro.baseprojectspringbatch.config.spring.batch;
+package br.com.rhribeiro.baseprojectspringbatch.utils.spring.batch;
 
 import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
 import br.com.rhribeiro.baseprojectspringbatch.utils.DateUtils;
@@ -25,7 +25,13 @@ public class LogFieldSetMapper implements FieldSetMapper<LogEntity> {
             String request = fieldSet.readString(2);
             Integer status = fieldSet.readInt(3);
             String userAgent = fieldSet.readString(4);
-            logItem = new LogEntity(createdAt, ip, request, status, userAgent);
+            logItem = LogEntity.builder()
+                    .createdAt(createdAt)
+                    .ip(ip)
+                    .request(request)
+                    .status(status)
+                    .userAgent(userAgent)
+                    .build();
         } catch (Exception e) {
             log.error(e.getMessage());
         }

@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -17,6 +19,7 @@ import java.util.List;
  * @date 07/07/21
  */
 
+@Validated
 @RestController
 @RequestMapping("/api/logs")
 public class LogController {
@@ -36,14 +39,14 @@ public class LogController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Object> save(@RequestBody LogEntity logModel) {
+    public ResponseEntity<Object> save(@RequestBody @Valid LogEntity logModel) {
         LogEntity log = logService.create(logModel);
         return new ResponseEntity<>(log, HttpStatus.CREATED);
     }
 
     @PutMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Object> update(@RequestBody LogEntity logModel) {
+    public ResponseEntity<Object> update(@RequestBody @Valid LogEntity logModel) {
         LogEntity log = logService.update(logModel);
         return new ResponseEntity<>(log, HttpStatus.OK);
     }

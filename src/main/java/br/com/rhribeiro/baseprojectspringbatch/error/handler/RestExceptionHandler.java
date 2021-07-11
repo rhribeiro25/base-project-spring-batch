@@ -1,10 +1,14 @@
 package br.com.rhribeiro.baseprojectspringbatch.error.handler;
 
 import br.com.rhribeiro.baseprojectspringbatch.error.ErrorDetails;
-import br.com.rhribeiro.baseprojectspringbatch.error.ValidationErrorDetails;
+import br.com.rhribeiro.baseprojectspringbatch.error.ParamErrorDetails;
+import br.com.rhribeiro.baseprojectspringbatch.error.ValidationError;
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.BadRequestErrorException;
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.InternalServerErrorException;
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.NotFoundException;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,33 +19,32 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Locale;
 
 /**
  * @author Renan Ribeiro
  * @date 11/07/2021
  */
+
+@Log4j2
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @Autowired
+    MessageSource messageSource;
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-
-        //Argument not valid by field
-        Map<String, ValidationErrorDetails> mapValErrors = new HashMap<>();
-        List<ValidationErrorDetails> listVal = ex.getBindingResult().getFieldErrors().stream()
-                .map(error -> mapValErrors.put("Field " + error.getField(), ValidationErrorDetails.builder().message(error.getDefaultMessage()).parameter(error.getRejectedValue()).build()))
-                .collect(Collectors.toList());
+        List<ParamErrorDetails> params = ValidationError.getParamErrorDetails(ex);
+        String msg =  messageSource.getMessage("message.bad.request.error.params", null, Locale.getDefault());
 
         ErrorDetails errorDetails = ErrorDetails.builder()
                 .status(HttpStatus.BAD_REQUEST.name())
                 .statusCode(HttpStatus.BAD_REQUEST.value())
-                .message("Arguments are not valid")
+                .message(msg)
                 .timesTamp(new Date().getTime())
-                .params(mapValErrors)
+                .params(params)
                 .build();
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }

@@ -1,94 +1,56 @@
 package br.com.rhribeiro.baseprojectspringbatch.model;
 
+import br.com.rhribeiro.baseprojectspringbatch.constraints.IpConstraint;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
  * @author Renan Ribeiro
  * @date 07/07/21
  */
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "log")
 public class LogEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private Date createdAt;
-	private String ip;
-	private String request;
-	private Integer status;
-	private String userAgent;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	public LogEntity() {
-	}
+    @NotNull
+    @Column(nullable = false)
+    private Date createdAt;
 
-	public LogEntity(Long id, Date createdAt, String ip, String request, Integer status, String userAgent) {
-		this.id = id;
-		this.createdAt = createdAt;
-		this.ip = ip;
-		this.request = request;
-		this.status = status;
-		this.userAgent = userAgent;
-	}
+    /************************ Exemplo de Constraint personalizada ************************/
+    @IpConstraint(require = true)
+    @Column(length = 15, nullable = false)
+    private String ip;
 
-	public LogEntity(Date createdAt, String ip, String request, Integer status, String userAgent) {
-		this.createdAt = createdAt;
-		this.ip = ip;
-		this.request = request;
-		this.status = status;
-		this.userAgent = userAgent;
-	}
+    @NotBlank
+    @Size(min = 5, max = 23)
+    @Column(length = 23, nullable = false)
+    private String request;
 
-	@Override
-	public String toString() {
-		return "LogModel [id=" + id + ", createdAt=" + createdAt + ", ip=" + ip + ", request=" + request + ", status="
-				+ status + ", userAgent=" + userAgent + "]";
-	}
+    @NotNull
+    @Digits(integer = 3, fraction = 0)
+    @Column(nullable = false)
+    private Integer status;
 
-	public Long getId() {
-		return id;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	public String getRequest() {
-		return request;
-	}
-
-	public void setRequest(String request) {
-		this.request = request;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public String getUserAgent() {
-		return userAgent;
-	}
-
-	public void setUserAgent(String userAgent) {
-		this.userAgent = userAgent;
-	}
+    @NotBlank
+    @Size(min = 15, max = 255)
+    @Column(nullable = false)
+    private String userAgent;
 
 }

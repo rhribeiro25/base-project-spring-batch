@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author Renan Ribeiro
@@ -25,6 +25,6 @@ public class ErrorDetails implements Serializable {
     private final String message;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private final Map<String, ValidationErrorDetails> params;
+    private final List<ParamErrorDetails> params;
 }
 
