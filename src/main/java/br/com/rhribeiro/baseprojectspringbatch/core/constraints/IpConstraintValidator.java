@@ -1,4 +1,4 @@
-package br.com.rhribeiro.baseprojectspringbatch.constraints;
+package br.com.rhribeiro.baseprojectspringbatch.core.constraints;
 
 import br.com.rhribeiro.baseprojectspringbatch.utils.StringUtils;
 

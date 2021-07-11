@@ -1,7 +1,6 @@
 package br.com.rhribeiro.baseprojectspringbatch.utils.spring.batch;
 
-import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
-import com.sun.istack.logging.Logger;
+import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;

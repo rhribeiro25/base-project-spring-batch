@@ -1,6 +1,6 @@
-package br.com.rhribeiro.baseprojectspringbatch.service;
+package br.com.rhribeiro.baseprojectspringbatch.core.usecases;
 
-import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
+import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.web.multipart.MultipartFile;
 

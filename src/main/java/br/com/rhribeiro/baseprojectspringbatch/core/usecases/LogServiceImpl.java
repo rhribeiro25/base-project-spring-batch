@@ -1,9 +1,9 @@
-package br.com.rhribeiro.baseprojectspringbatch.service;
+package br.com.rhribeiro.baseprojectspringbatch.core.usecases;
 
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.BadRequestErrorException;
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.InternalServerErrorException;
-import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
-import br.com.rhribeiro.baseprojectspringbatch.repository.LogRepository;
+import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
+import br.com.rhribeiro.baseprojectspringbatch.dataprovider.database.postgresql.LogRepository;
 import br.com.rhribeiro.baseprojectspringbatch.utils.DateUtils;
 import br.com.rhribeiro.baseprojectspringbatch.utils.FileUtils;
 import lombok.extern.log4j.Log4j2;

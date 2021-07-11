@@ -1,7 +1,7 @@
-package br.com.rhribeiro.baseprojectspringbatch.controller;
+package br.com.rhribeiro.baseprojectspringbatch.entrypoint.rest;
 
-import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
-import br.com.rhribeiro.baseprojectspringbatch.service.LogService;
+import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
+import br.com.rhribeiro.baseprojectspringbatch.core.usecases.LogService;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

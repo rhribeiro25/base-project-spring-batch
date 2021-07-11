@@ -1,7 +1,7 @@
 package br.com.rhribeiro.baseprojectspringbatch.utils.spring.batch;
 
-import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
-import br.com.rhribeiro.baseprojectspringbatch.service.LogService;
+import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
+import br.com.rhribeiro.baseprojectspringbatch.core.usecases.LogService;
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.InternalServerErrorException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.batch.item.ItemWriter;

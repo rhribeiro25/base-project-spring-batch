@@ -1,6 +1,6 @@
 package br.com.rhribeiro.baseprojectspringbatch.config.spring.batch;
 
-import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
+import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
 import br.com.rhribeiro.baseprojectspringbatch.utils.spring.batch.LogFieldSetMapper;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;

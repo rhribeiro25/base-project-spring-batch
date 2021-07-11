@@ -1,6 +1,6 @@
-package br.com.rhribeiro.baseprojectspringbatch.repository;
+package br.com.rhribeiro.baseprojectspringbatch.dataprovider.database.postgresql;
 
-import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
+import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

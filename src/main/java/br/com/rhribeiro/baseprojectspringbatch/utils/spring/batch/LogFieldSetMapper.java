@@ -1,6 +1,6 @@
 package br.com.rhribeiro.baseprojectspringbatch.utils.spring.batch;
 
-import br.com.rhribeiro.baseprojectspringbatch.model.LogEntity;
+import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
 import br.com.rhribeiro.baseprojectspringbatch.utils.DateUtils;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;

@@ -1,6 +1,6 @@
-package br.com.rhribeiro.baseprojectspringbatch.model;
+package br.com.rhribeiro.baseprojectspringbatch.core.entity;
 
-import br.com.rhribeiro.baseprojectspringbatch.constraints.IpConstraint;
+import br.com.rhribeiro.baseprojectspringbatch.core.constraints.IpConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
