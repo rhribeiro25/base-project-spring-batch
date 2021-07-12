@@ -6,6 +6,8 @@ import br.com.rhribeiro.baseprojectspringbatch.error.ValidationError;
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.BadRequestErrorException;
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.InternalServerErrorException;
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.NotFoundException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -34,7 +36,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     MessageSource messageSource;
 
+    ObjectMapper objectMapper = new ObjectMapper();
+
     @Override
+    @SneakyThrows
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<ParamErrorDetails> params = ValidationError.getParamErrorDetails(ex);
         String msg =  messageSource.getMessage("message.bad.request.error.params", null, Locale.getDefault());
@@ -46,9 +51,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .timesTamp(new Date().getTime())
                 .params(params)
                 .build();
+        log.error(objectMapper.writeValueAsString(errorDetails));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
+    @SneakyThrows
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> handlerNotFoundException(NotFoundException ex) {
         ErrorDetails errorDetails = ErrorDetails.builder()
@@ -57,9 +64,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(ex.getMessage())
                 .timesTamp(new Date().getTime())
                 .build();
+        log.error(objectMapper.writeValueAsString(errorDetails));
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
+    @SneakyThrows
     @ExceptionHandler(InternalServerErrorException.class)
     public ResponseEntity<?> handlerInternalServerErrorException(InternalServerErrorException ex) {
         ErrorDetails errorDetails = ErrorDetails.builder()
@@ -68,9 +77,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(ex.getMessage())
                 .timesTamp(new Date().getTime())
                 .build();
+        log.error(objectMapper.writeValueAsString(errorDetails));
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @SneakyThrows
     @ExceptionHandler(BadRequestErrorException.class)
     public ResponseEntity<?> handlerBadRequestErrorException(BadRequestErrorException ex) {
         ErrorDetails errorDetails = ErrorDetails.builder()
@@ -79,6 +90,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(ex.getMessage())
                 .timesTamp(new Date().getTime())
                 .build();
+        log.error(objectMapper.writeValueAsString(errorDetails));
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 

@@ -1,7 +1,6 @@
 package br.com.rhribeiro.baseprojectspringbatch.error;
 
 import br.com.rhribeiro.baseprojectspringbatch.utils.StaticContextUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.validation.FieldError;
@@ -17,7 +16,6 @@ import java.util.Locale;
  * @author Renan Ribeiro
  * @since 11/07/2021
  */
-@Slf4j
 public class ValidationError {
 
     public static List<ParamErrorDetails> getParamErrorDetails(MethodArgumentNotValidException ex) {
