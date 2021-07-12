@@ -194,7 +194,7 @@ public class LogControllerTests {
     @Test
     public void findByIpHttpStatus200() {
         String ip = "192.168.169.19";
-        BDDMockito.when(logRepository.findLogModelsByIpIsContaining(ip)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByIpIsContaining(ip)).thenReturn(logs);
         ResponseEntity<List> response = restTemplate.getForEntity("/api/logs/ip/" + ip, List.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
@@ -203,7 +203,7 @@ public class LogControllerTests {
     public void findByIpHttpStatus401() {
         restTemplate = restTemplate.withBasicAuth("test", "test");
         String ip = "192.168.169.19";
-        BDDMockito.when(logRepository.findLogModelsByIpIsContaining(ip)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByIpIsContaining(ip)).thenReturn(logs);
         ResponseEntity<String> response = restTemplate.getForEntity("/api/logs/ip/" + ip, String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(401);
     }
@@ -211,7 +211,7 @@ public class LogControllerTests {
     @Test
     public void findByIpHttpStatus404() {
         String ip = "192.168.169.19";
-        BDDMockito.when(logRepository.findLogModelsByIpIsContaining(ip)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByIpIsContaining(ip)).thenReturn(logs);
         ResponseEntity<String> response = restTemplate.getForEntity("/log/find-by-ip/" + ip, String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
@@ -219,7 +219,7 @@ public class LogControllerTests {
     @Test
     public void findByIpHttpStatus405() {
         String ip = "192.168.169.19";
-        BDDMockito.when(logRepository.findLogModelsByIpIsContaining(ip)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByIpIsContaining(ip)).thenReturn(logs);
         ResponseEntity<String> response = restTemplate.postForEntity("/api/logs/ip/" + ip, logs, String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(405);
     }
@@ -230,7 +230,7 @@ public class LogControllerTests {
     @Test
     public void findByStatusHttpStatus200() {
         Integer status = 200;
-        BDDMockito.when(logRepository.findLogModelsByStatus(status)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByStatus(status)).thenReturn(logs);
         ResponseEntity<List> response = restTemplate.getForEntity("/api/logs/status/" + status, List.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
@@ -239,7 +239,7 @@ public class LogControllerTests {
     public void findByStatusHttpStatus401() {
         restTemplate = restTemplate.withBasicAuth("test", "test");
         Integer status = 200;
-        BDDMockito.when(logRepository.findLogModelsByStatus(status)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByStatus(status)).thenReturn(logs);
         ResponseEntity<String> response = restTemplate.getForEntity("/api/logs/status/" + status, String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(401);
     }
@@ -247,7 +247,7 @@ public class LogControllerTests {
     @Test
     public void findByStatusHttpStatus404() {
         Integer status = 200;
-        BDDMockito.when(logRepository.findLogModelsByStatus(status)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByStatus(status)).thenReturn(logs);
         ResponseEntity<String> response = restTemplate.getForEntity("/log/status/" + status, String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
@@ -255,7 +255,7 @@ public class LogControllerTests {
     @Test
     public void findByStatusHttpStatus405() {
         Integer status = 200;
-        BDDMockito.when(logRepository.findLogModelsByStatus(status)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByStatus(status)).thenReturn(logs);
         ResponseEntity<String> response = restTemplate.postForEntity("/api/logs/status/" + status, logs, String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(405);
     }
@@ -265,7 +265,7 @@ public class LogControllerTests {
      */
     @Test
     public void findByCreatedAtBetweenHttpStatus200() {
-        BDDMockito.when(logRepository.findLogModelsByCreatedAtBetween(from, to)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByCreatedAtBetween(from, to)).thenReturn(logs);
         ResponseEntity<List> response = restTemplate.getForEntity(
                 "/api/logs/created-at-between/2020-01-01 00:00:23.003/2020-01-05 00:00:23.003", List.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(200);
@@ -274,7 +274,7 @@ public class LogControllerTests {
     @Test
     public void findByCreatedAtBetweenHttpStatus401() {
         restTemplate = restTemplate.withBasicAuth("test", "test");
-        BDDMockito.when(logRepository.findLogModelsByCreatedAtBetween(from, to)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByCreatedAtBetween(from, to)).thenReturn(logs);
         ResponseEntity<String> response = restTemplate.getForEntity(
                 "/api/logs/created-at-between/2020-01-01 00:00:23.003/2020-01-05 00:00:23.003", String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(401);
@@ -282,7 +282,7 @@ public class LogControllerTests {
 
     @Test
     public void findByCreatedAtBetweenHttpStatus404() {
-        BDDMockito.when(logRepository.findLogModelsByCreatedAtBetween(from, to)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByCreatedAtBetween(from, to)).thenReturn(logs);
         ResponseEntity<String> response = restTemplate.getForEntity(
                 "/logs/created-at-between/2020-01-01 00:00:23.003/2020-01-05 00:00:23.003", String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(404);
@@ -290,7 +290,7 @@ public class LogControllerTests {
 
     @Test
     public void findByCreatedAtBetweenHttpStatus405() {
-        BDDMockito.when(logRepository.findLogModelsByCreatedAtBetween(from, to)).thenReturn(logs);
+        BDDMockito.when(logRepository.findByCreatedAtBetween(from, to)).thenReturn(logs);
         ResponseEntity<String> response = restTemplate.postForEntity(
                 "/api/logs/created-at-between/2020-01-01 00:00:23.003/2020-01-05 00:00:23.003", logs, String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(405);

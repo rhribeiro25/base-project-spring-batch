@@ -13,10 +13,10 @@ import java.util.List;
 
 public interface LogRepository extends JpaRepository<LogEntity, Long> {
 
-    public List<LogEntity> findLogModelsByIpIsContaining(String ip);
+    public List<LogEntity> findByIpIsContaining(String ip);
 
-    public List<LogEntity> findLogModelsByStatus(Integer status);
+    public List<LogEntity> findByStatus(Integer status);
 
-    public List<LogEntity> findLogModelsByCreatedAtBetween(Date from, Date to);
+    public List<LogEntity> findByCreatedAtBetween(Date from, Date to);
 
 }

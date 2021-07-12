@@ -134,13 +134,13 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public List<LogResponse> findByIp(String ip) {
-        List<LogEntity> logs = logRepository.findLogModelsByIpIsContaining(ip);
+        List<LogEntity> logs = logRepository.findByIpIsContaining(ip);
         return verifyAndReturnLogList(logs);
     }
 
     @Override
     public List<LogResponse> findByStatus(Integer status) {
-        List<LogEntity> logs = logRepository.findLogModelsByStatus(status);
+        List<LogEntity> logs = logRepository.findByStatus(status);
         return verifyAndReturnLogList(logs);
     }
 
@@ -148,7 +148,7 @@ public class LogServiceImpl implements LogService {
     public List<LogResponse> findByCreatedAtBetween(String from, String to) {
         Date dateFrom = DateUtils.stringToDate_yyyy_MM_dd__HH_mm_ss(from);
         Date dateTo = DateUtils.stringToDate_yyyy_MM_dd__HH_mm_ss(to);
-        List<LogEntity> logs = logRepository.findLogModelsByCreatedAtBetween(dateFrom, dateTo);
+        List<LogEntity> logs = logRepository.findByCreatedAtBetween(dateFrom, dateTo);
         return verifyAndReturnLogList(logs);
     }
 
