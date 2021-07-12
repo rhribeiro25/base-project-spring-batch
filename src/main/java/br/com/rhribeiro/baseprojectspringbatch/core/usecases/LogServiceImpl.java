@@ -36,16 +36,16 @@ import java.util.*;
 public class LogServiceImpl implements LogService {
 
     @Autowired
-    JobLauncher jobLauncher;
+    private JobLauncher jobLauncher;
 
     @Autowired
-    MessageSource messageSource;
+    private MessageSource messageSource;
 
     @Autowired
-    GenericConverter genericConverter;
+    private GenericConverter converter;
 
     @Autowired
-    Job job;
+    private Job job;
 
     @Autowired
     private LogRepository logRepository;
@@ -88,8 +88,8 @@ public class LogServiceImpl implements LogService {
     public LogResponse create(LogCreateRequest logRequest) {
         try {
             logRequest.setCreatedAt(new Date());
-            LogEntity log = logRepository.save(genericConverter.converterObjectToObject(logRequest, LogEntity.class));
-            return genericConverter.converterObjectToObject(log, LogResponse.class);
+            LogEntity log = logRepository.save(converter.converterObjectToObject(logRequest, LogEntity.class));
+            return converter.converterObjectToObject(log, LogResponse.class);
         } catch (Exception e) {
             throw new InternalServerErrorException(e.getMessage());
         }
@@ -98,8 +98,8 @@ public class LogServiceImpl implements LogService {
     @Override
     public LogResponse update(LogUpdateRequest logRequest) {
         this.existsById(logRequest.getId());
-        LogEntity log = logRepository.save(genericConverter.converterObjectToObject(logRequest, LogEntity.class));
-        return genericConverter.converterObjectToObject(log, LogResponse.class);
+        LogEntity log = logRepository.save(converter.converterObjectToObject(logRequest, LogEntity.class));
+        return converter.converterObjectToObject(log, LogResponse.class);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class LogServiceImpl implements LogService {
     public LogResponse findById(Long id) {
         LogEntity log = logRepository.findById(id).orElse(null);
         if (log != null)
-            return genericConverter.converterObjectToObject(log, LogResponse.class);
+            return converter.converterObjectToObject(log, LogResponse.class);
         return null;
     }
 
@@ -162,7 +162,7 @@ public class LogServiceImpl implements LogService {
 
     private List verifyAndReturnLogList(List<LogEntity> logs) {
         if (logs != null && logs.size() > 0)
-            return genericConverter.converterListToList(logs, LogResponse.class);
+            return converter.converterListToList(logs, LogResponse.class);
         else return new ArrayList<>();
     }
 

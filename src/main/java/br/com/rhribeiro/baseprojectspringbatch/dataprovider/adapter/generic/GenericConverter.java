@@ -4,6 +4,7 @@ import br.com.rhribeiro.baseprojectspringbatch.error.exception.InternalServerErr
 import br.com.rhribeiro.baseprojectspringbatch.utils.StaticContextUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +22,9 @@ import java.util.stream.Collectors;
 @Component
 public class GenericConverter {
 
-    private MessageSource messageSource = StaticContextUtils.getBean(MessageSource.class);
+    @Autowired
+    private MessageSource messageSource;
+
     private ModelMapper modelMapper = new ModelMapper();
 
     public <S, T> List<T> converterListToList(List<S> source, Class<T> outputClass) {
