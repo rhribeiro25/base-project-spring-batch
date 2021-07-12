@@ -124,3 +124,7 @@ Obs: Ficaríamos impressionados se seu projeto levasse em conta uma arquitetura 
   login: admin
   password: smartLog2020
 ```
+- There are test files in the following directory:
+```
+  Path: \src\main\resources\csv\*
+```
