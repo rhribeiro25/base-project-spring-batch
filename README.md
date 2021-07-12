@@ -1,39 +1,51 @@
-Prevent Senior - Roteiro do desafio técnico
+# SmartLog
 
-Seu objetivo é criar uma aplicação em Java para fazer o upload de um arquivo de logs populando o banco de dados.
-Para isso, será necessário uma interface para o upload do arquivo de logs e uma para inserir/editar/listar/consultar/pesquisar (CRUD).
-Implementar o back-end com (Spring ou JavaEE/MicroProfile usando java 8+) e front-end Angular 6+.
+OBJETIVO
+--------
+Escrever uma aplicação Java para fazer upload de arquivo de log e popular o banco de dados,
+uma interface para listar/consultar/pesquisar os logs, e uma ultima interface com formulário
+para inserção manual de log. Implemente o back-end com (Spring ou JavaEE) e front-end (JSP
+ou SPA) (front-end em Angular será considerado um diferencial).
 
-Detalhes do back-end
+DETALHES DO BACK-END:
+-----------
+- Definir o modelo de dados no PostgreSQL;
+- Definir serviços para a inserção em batch (usando o arquivo de logs fornecido,
+usando JPA);
+- Definir serviços para a inserção de logs manuais (CRUD);
+- Implementar filtros ou pesquisas de logs;
+- (BÔNUS) Testes automatizados;
 
-Definir o modelo de dados no PostgreSQL;
-Definir serviços para envio do arquivo de logs fornecido, e inserção dos logs em massa usando JPA (não utilizar spring-data-jpa);
-Definir serviços para inserção de logs manuais (CRUD) (não utilizar spring-data-jpa);
-Implementar filtros ou pesquisas de logs;
-Testes Unitários;
-(BÔNUS) Testes de Integração.
-Detalhes do front-end
+DETALHES DO FRONT-END:
+-----------
+- Tela para inserção de logs manuais (CRUD);
+- Tela para inserção de logs usando o arquivo modelo;
+- Tela para buscar logs feitos por um determinado IP e por um intervalo de tempo;
+- (BÔNUS) Dashboard para exibir o número de requests feitos por um determinado IP,
+por hora, user-agent (agregação);
 
-Tela para inserção de logs manuais (CRUD).
-Tela para inserção de logs usando o arquivo modelo.
-(BÔNUS) Uma tela (dashboard) para exibir os logs feitos por um determinado IP, por hora, user-agent (agregação).
-Detalhes do arquivo de log
-
+FORMATO LOG
+-----------
 Data, IP, Request, Status, User Agent (delimitado por aspas duplas);
-O delimitador do arquivo de log é o caracter pipe |;
-Formato de data: yyyy-MM-dd HH:mm:ss.SSS;
+O delimitador do arquivo de log é o caracter pipe (|);
+Formato de data: "yyyy-MM-dd HH:mm:ss.SSS";
 
-O que avaliamos?
+ENTREGAS
+--------
+(1) Aplicação JavaWEB (Spring ou JavaEE).
 
-Princípios de programação
-Arquitetura de Software
-Manutenabilidade
-Performance
-Testes
-Obs: Ficaríamos impressionados se seu projeto levasse em conta uma arquitetura de sistema distribuído e de alta disponibilidade
+(2) Código Fonte da aplicação (back-end e front-end).
 
-Como entregar?
+(3) Esquema do PostgreSQL usado para os dados de log.
 
-Crie um repositório privado no seu perfil do GitHub.
-Assim que terminar é só compartilhar o código com os usuários brunorabaca, chroniclesBR e HFRANCO1987
-Boa sorte e divirta-se! =)
+Detalhes do desenvolvimento
+--------
+Será disponibilizado um postmanCollection para testes da API em __"\src\main\resources\postmanCollection"__.
+Utilizar as autenticações abaixo diretamente no postman:
+##### Leitura
+- __User:__ user
+- __password:__ smartLog2020
+##### Gravação
+- __User:__ admin
+- __password:__ smartLog2020
+
