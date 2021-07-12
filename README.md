@@ -94,7 +94,7 @@ Obs: Ficaríamos impressionados se seu projeto levasse em conta uma arquitetura 
   ```
   Host name/ address : pgsql
   port: 5432
-  Maintenance database: bank-project-db
+  Maintenance database: base-project-spring-batch-db
   Username: postgres
   Password: postgres
   ```
