@@ -39,7 +39,7 @@ O que avaliamos?
 Obs: Ficaríamos impressionados se seu projeto levasse em conta uma arquitetura de sistema distribuído e de alta disponibilidade
 
 # Detalhes do desenvolvimento
---------
+
 Será disponibilizado um postmanCollection para testes da API em __"\src\main\resources\postmanCollection"__.
 Utilizar as autenticações abaixo diretamente no postman:
 ##### Leitura
