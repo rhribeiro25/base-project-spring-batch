@@ -1,11 +1,10 @@
-package br.com.rhribeiro.baseprojectspringbatch.core.entity;
+package br.com.rhribeiro.baseprojectspringbatch.core.dtos.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -16,26 +15,16 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-@Table(name = "log")
-public class LogEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class LogResponse {
 
     private Date createdAt;
 
-    @Column(length = 15, nullable = false)
     private String ip;
 
-    @Column(length = 23, nullable = false)
     private String request;
 
-    @Column(nullable = false)
     private Integer status;
 
-    @Column(nullable = false)
     private String userAgent;
 
 }

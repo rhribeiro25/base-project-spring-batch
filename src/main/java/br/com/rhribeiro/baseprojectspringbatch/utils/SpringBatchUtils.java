@@ -1,4 +1,4 @@
-package br.com.rhribeiro.baseprojectspringbatch.utils.spring.batch;
+package br.com.rhribeiro.baseprojectspringbatch.utils;
 
 import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
 import br.com.rhribeiro.baseprojectspringbatch.utils.DateUtils;
@@ -14,7 +14,7 @@ import java.util.Date;
  */
 
 @Log4j2
-public class LogFieldSetMapper implements FieldSetMapper<LogEntity> {
+public class SpringBatchUtils implements FieldSetMapper<LogEntity> {
 
     @Override
     public LogEntity mapFieldSet(FieldSet fieldSet) {

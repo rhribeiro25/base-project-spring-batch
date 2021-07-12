@@ -1,7 +1,7 @@
 package br.com.rhribeiro.baseprojectspringbatch.config.spring.batch;
 
 import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
-import br.com.rhribeiro.baseprojectspringbatch.utils.spring.batch.LogFieldSetMapper;
+import br.com.rhribeiro.baseprojectspringbatch.utils.SpringBatchUtils;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -63,7 +63,7 @@ public class SpringBatchConfig {
         lineTokenizer.setStrict(false);
         lineTokenizer.setNames(new String[]{"createdAt", "ip", "request", "status", "userAgent"});
 
-        LogFieldSetMapper fieldSetMapper = new LogFieldSetMapper();
+        SpringBatchUtils fieldSetMapper = new SpringBatchUtils();
 
         defaultLineMapper.setLineTokenizer(lineTokenizer);
         defaultLineMapper.setFieldSetMapper(fieldSetMapper);

@@ -1,4 +1,4 @@
-package br.com.rhribeiro.baseprojectspringbatch.utils.spring.batch;
+package br.com.rhribeiro.baseprojectspringbatch.core.usecases;
 
 import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
 import br.com.rhribeiro.baseprojectspringbatch.core.usecases.LogService;
@@ -6,7 +6,7 @@ import br.com.rhribeiro.baseprojectspringbatch.error.exception.InternalServerErr
 import lombok.extern.log4j.Log4j2;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import java.util.List;
  * @date 07/07/21
  */
 @Log4j2
-@Component
-public class LogItemWriter implements ItemWriter<LogEntity> {
+@Service
+public class ItemWriterServiceImpl implements ItemWriter<LogEntity> {
 
     @Autowired
     private LogService logService;

@@ -1,9 +1,9 @@
-package br.com.rhribeiro.baseprojectspringbatch.utils.spring.batch;
+package br.com.rhribeiro.baseprojectspringbatch.core.usecases;
 
 import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Renan Ribeiro
@@ -11,9 +11,8 @@ import org.springframework.stereotype.Component;
  */
 
 @Log4j2
-@Component
-public class LogItemProcessor implements ItemProcessor<LogEntity, LogEntity> {
-
+@Service
+public class ItemProcessorServiceImpl implements ItemProcessor<LogEntity, LogEntity> {
 
     @Override
     public LogEntity process(LogEntity logEntity) throws Exception {

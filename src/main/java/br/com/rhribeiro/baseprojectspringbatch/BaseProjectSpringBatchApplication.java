@@ -12,8 +12,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 
 @SpringBootApplication
-@EntityScan(basePackages = {"br.com.rhribeiro.baseprojectspringbatch.model"})
-@EnableJpaRepositories(basePackages = {"br.com.rhribeiro.baseprojectspringbatch.repository"})
+@EntityScan(basePackages = {"br.com.rhribeiro.baseprojectspringbatch.core.entity"})
+@EnableJpaRepositories(basePackages = {"br.com.rhribeiro.baseprojectspringbatch.dataprovider.database.postgresql"})
 @Slf4j
 public class BaseProjectSpringBatchApplication {
 

@@ -9,6 +9,7 @@ plugins {
 ext {
     appVersion = '1.0.1'
     appName = 'base-project-spring-batch'
+    modelMapperVersion = "2.4.4"
 }
 
 group = 'rhribeiro25'
@@ -29,7 +30,7 @@ repositories {
 }
 
 dependencies {
-    // Spring Frameworks
+    // SPRING FRAMEWORKS
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation "org.springframework.boot:spring-boot-devtools"
     implementation "org.springframework.boot:spring-boot-starter-web"
@@ -40,16 +41,17 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation "org.springframework.boot:spring-boot-configuration-processor"
 
-    // Jetbrains annotations
-    implementation 'org.jetbrains:annotations:20.1.0'
+    // MODEL MAPPER
+    implementation "org.modelmapper:modelmapper:${modelMapperVersion}"
 
-    // Lombok
+    // LOMBOK
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    // Database
+    // POSTGRESQL CONNECTOR
     runtimeOnly "org.postgresql:postgresql"
 
+    // TEST DEPENDENCIES
     testImplementation "org.springframework.security:spring-security-test"
     testImplementation "org.springframework.batch:spring-batch-test"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

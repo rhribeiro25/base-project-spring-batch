@@ -1,6 +1,8 @@
 package br.com.rhribeiro.baseprojectspringbatch.entrypoint.rest;
 
-import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
+import br.com.rhribeiro.baseprojectspringbatch.core.dtos.request.LogCreateRequest;
+import br.com.rhribeiro.baseprojectspringbatch.core.dtos.request.LogUpdateRequest;
+import br.com.rhribeiro.baseprojectspringbatch.core.dtos.response.LogResponse;
 import br.com.rhribeiro.baseprojectspringbatch.core.usecases.LogService;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,15 +41,15 @@ public class LogController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Object> save(@RequestBody @Valid LogEntity logModel) {
-        LogEntity log = logService.create(logModel);
+    public ResponseEntity<Object> save(@RequestBody @Valid LogCreateRequest logModel) {
+        LogResponse log = logService.create(logModel);
         return new ResponseEntity<>(log, HttpStatus.CREATED);
     }
 
     @PutMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Object> update(@RequestBody @Valid LogEntity logModel) {
-        LogEntity log = logService.update(logModel);
+    public ResponseEntity<Object> update(@RequestBody @Valid LogUpdateRequest logModel) {
+        LogResponse log = logService.update(logModel);
         return new ResponseEntity<>(log, HttpStatus.OK);
     }
 
@@ -60,32 +62,32 @@ public class LogController {
 
     @GetMapping("{id}")
     public ResponseEntity<Object> findById(@PathVariable("id") Long id) {
-        LogEntity logModel = logService.findById(id);
+        LogResponse logModel = logService.findById(id);
         return new ResponseEntity<>(logModel, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<Object> findAll() {
-        List<LogEntity> logs = logService.findAll();
+        List<LogResponse> logs = logService.findAll();
         return new ResponseEntity<>(logs, HttpStatus.OK);
     }
 
     @GetMapping("/ip/{ip}")
     public ResponseEntity<Object> findByIp(@PathVariable("ip") String ip) {
-        List<LogEntity> logs = logService.findByIp(ip);
+        List<LogResponse> logs = logService.findByIp(ip);
         return new ResponseEntity<>(logs, HttpStatus.OK);
     }
 
     @GetMapping("/status/{status}")
     public ResponseEntity<Object> findByStatus(@PathVariable("statusLog") Integer statusLog) {
-        List<LogEntity> logs = logService.findByStatus(statusLog);
+        List<LogResponse> logs = logService.findByStatus(statusLog);
         return new ResponseEntity<>(logs, HttpStatus.OK);
     }
 
     @GetMapping("/created-at-between/{from}/{to}")
     public ResponseEntity<Object> findByCreatedAtBetween(@PathVariable("from") String from,
                                                          @PathVariable("to") String to) {
-        List<LogEntity> logs = logService.findByCreatedAtBetween(from, to);
+        List<LogResponse> logs = logService.findByCreatedAtBetween(from, to);
         return new ResponseEntity<>(logs, HttpStatus.OK);
     }
 }

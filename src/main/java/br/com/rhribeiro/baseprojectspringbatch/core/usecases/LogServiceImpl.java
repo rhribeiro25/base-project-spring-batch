@@ -1,9 +1,13 @@
 package br.com.rhribeiro.baseprojectspringbatch.core.usecases;
 
+import br.com.rhribeiro.baseprojectspringbatch.core.dtos.request.LogCreateRequest;
+import br.com.rhribeiro.baseprojectspringbatch.core.dtos.request.LogUpdateRequest;
+import br.com.rhribeiro.baseprojectspringbatch.core.dtos.response.LogResponse;
+import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
+import br.com.rhribeiro.baseprojectspringbatch.dataprovider.adapter.generic.GenericConverter;
+import br.com.rhribeiro.baseprojectspringbatch.dataprovider.database.postgresql.LogRepository;
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.BadRequestErrorException;
 import br.com.rhribeiro.baseprojectspringbatch.error.exception.InternalServerErrorException;
-import br.com.rhribeiro.baseprojectspringbatch.core.entity.LogEntity;
-import br.com.rhribeiro.baseprojectspringbatch.dataprovider.database.postgresql.LogRepository;
 import br.com.rhribeiro.baseprojectspringbatch.utils.DateUtils;
 import br.com.rhribeiro.baseprojectspringbatch.utils.FileUtils;
 import lombok.extern.log4j.Log4j2;
@@ -78,21 +82,21 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public LogEntity create(LogEntity logModel) {
+    public LogResponse create(LogCreateRequest logRequest) {
         try {
-            logModel.setCreatedAt(new Date());
-            logRepository.save(logModel);
-            return logModel;
+            logRequest.setCreatedAt(new Date());
+            LogEntity log = logRepository.save(GenericConverter.converterObjectToObject(logRequest, LogEntity.class));
+            return GenericConverter.converterObjectToObject(log, LogResponse.class);
         } catch (Exception e) {
             throw new InternalServerErrorException(e.getMessage());
         }
     }
 
     @Override
-    public LogEntity update(LogEntity logModel) {
-        this.existsById(logModel.getId());
-        logRepository.save(logModel);
-        return logModel;
+    public LogResponse update(LogUpdateRequest logRequest) {
+        this.existsById(logRequest.getId());
+        LogEntity log = logRepository.save(GenericConverter.converterObjectToObject(logRequest, LogEntity.class));
+        return GenericConverter.converterObjectToObject(log, LogResponse.class);
     }
 
     @Override
@@ -112,30 +116,35 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public LogEntity findById(Long id) {
-        return logRepository.findById(id).orElse(null);
+    public LogResponse findById(Long id) {
+        LogEntity log = logRepository.findById(id).orElse(null);
+        return GenericConverter.converterObjectToObject(log, LogResponse.class);
     }
 
     @Override
-    public List<LogEntity> findAll() {
-        return logRepository.findAll();
+    public List<LogResponse> findAll() {
+        List<LogEntity> logs = logRepository.findAll();
+        return GenericConverter.converterListToList(logs, LogResponse.class);
     }
 
     @Override
-    public List<LogEntity> findByIp(String ip) {
-        return logRepository.findLogModelsByIpIsContaining(ip);
+    public List<LogResponse> findByIp(String ip) {
+        List<LogEntity> logs = logRepository.findLogModelsByIpIsContaining(ip);
+        return GenericConverter.converterListToList(logs, LogResponse.class);
     }
 
     @Override
-    public List<LogEntity> findByStatus(Integer status) {
-        return logRepository.findLogModelsByStatus(status);
+    public List<LogResponse> findByStatus(Integer status) {
+        List<LogEntity> logs = logRepository.findLogModelsByStatus(status);
+        return GenericConverter.converterListToList(logs, LogResponse.class);
     }
 
     @Override
-    public List<LogEntity> findByCreatedAtBetween(String from, String to) {
+    public List<LogResponse> findByCreatedAtBetween(String from, String to) {
         Date dateFrom = DateUtils.stringToDate_yyyy_MM_dd__HH_mm_ss(from);
         Date dateTo = DateUtils.stringToDate_yyyy_MM_dd__HH_mm_ss(to);
-        return logRepository.findLogModelsByCreatedAtBetween(dateFrom, dateTo);
+        List<LogEntity> logs = logRepository.findLogModelsByCreatedAtBetween(dateFrom, dateTo);
+        return GenericConverter.converterListToList(logs, LogResponse.class);
     }
 
     private void existsById(Long id) {
