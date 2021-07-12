@@ -1,6 +1,16 @@
 version: '3.7'
 
 services:
+  app:
+    build: app-smart-logs/.
+    ports:
+      - 4200:4200
+    volumes:
+      - /app-smart-logs/app/node_modules
+      - /app-smart-logs/.:/app-smart-logs/app
+    depends_on:
+      - api
+
   api:
     container_name: api
     image: rhribeiro25/base-project-spring-batch:latest
