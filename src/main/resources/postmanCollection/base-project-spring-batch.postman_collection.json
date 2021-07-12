@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "39d548f4-15b4-4a95-a81a-779ac6c6c98d",
+		"_postman_id": "78a7a0f4-59d9-4148-8741-5c3ae67ffe16",
 		"name": "base-project-spring-batch",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -25,16 +25,27 @@
 				},
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "log",
+							"type": "file",
+							"src": "/home/rhribeiro25/Documents/base-project-spring-batch/src/main/resources/csv/log.csv"
+						}
+					]
+				},
 				"url": {
-					"raw": "http://localhost:9090/logs/create-by-batch",
+					"raw": "http://localhost:9090/api/logs/batch",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "9090",
 					"path": [
+						"api",
 						"logs",
-						"create-by-batch"
+						"batch"
 					]
 				}
 			},
@@ -61,16 +72,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9090/logs/find-by-id/238770",
+					"raw": "http://localhost:9090/api/logs/10",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "9090",
 					"path": [
+						"api",
 						"logs",
-						"find-by-id",
-						"238770"
+						"10"
 					]
 				}
 			},
@@ -98,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"id\": 1,\r\n    \"createdAt\": \"2020-01-01T02:51:21.164+00:00\",\r\n    \"ip\": \"192.168.234.87\",\r\n    \"request\": \"GET / HTTP/1.1\",\r\n    \"status\": 200,\r\n    \"userAgent\": \"renan (unknown version) CFNetwork/808.2.16 Darwin/15.6.0\"\r\n}",
+					"raw": "{\r\n    \"createdAt\": \"2020-01-01T02:51:21.164+00:00\",\r\n    \"ip\": \"192.168.234.87\",\r\n    \"request\": \"GET / HTTP/1.1\",\r\n    \"status\": 200,\r\n    \"userAgent\": \"renan (unknown version) CFNetwork/808.2.16 Darwin/15.6.0\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -106,15 +117,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9090/logs/create",
+					"raw": "http://localhost:9090/api/logs",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "9090",
 					"path": [
-						"logs",
-						"create"
+						"api",
+						"logs"
 					]
 				}
 			},
@@ -141,15 +152,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9090/logs/find-all",
+					"raw": "http://localhost:9090/api/logs",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "9090",
 					"path": [
-						"logs",
-						"find-all"
+						"api",
+						"logs"
 					]
 				}
 			},
@@ -176,56 +187,18 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9090/logs/find-by-createdat-between/2020-01-01 00:00:11.763/2020-01-01 00:13:48.478",
+					"raw": "http://localhost:9090/api/logs/created-at-between/2020-01-01 00:00:11.763/2021-01-01 00:00:11.763",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "9090",
 					"path": [
+						"api",
 						"logs",
-						"find-by-createdat-between",
+						"created-at-between",
 						"2020-01-01 00:00:11.763",
-						"2020-01-01 00:13:48.478"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "find-by-params",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "smartLog2020",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "user",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:9090/logs/find-by-params/192.168.234.82",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "9090",
-					"path": [
-						"logs",
-						"find-by-params",
-						"192.168.234.82"
+						"2021-01-01 00:00:11.763"
 					]
 				}
 			},
@@ -253,7 +226,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 238770,\r\n    \"createdAt\": \"2020-01-01T02:00:23.003+00:00\",\r\n    \"ip\": \"192.168.169.194\",\r\n    \"request\": \"GET / HTTP/1.1\",\r\n    \"status\": 201,\r\n    \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393\"\r\n}",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"createdAt\": \"2020-01-01T02:00:23.003+00:00\",\r\n    \"ip\": \"192.168.169.194\",\r\n    \"request\": \"GET / HTTP/1.1\",\r\n    \"status\": 201,\r\n    \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -261,15 +234,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9090/logs/update",
+					"raw": "http://localhost:9090/api/logs",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "9090",
 					"path": [
-						"logs",
-						"update"
+						"api",
+						"logs"
 					]
 				}
 			},
@@ -295,30 +268,58 @@
 				},
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\": 238770,\r\n    \"createdAt\": \"2020-01-01T02:00:23.003+00:00\",\r\n    \"ip\": \"192.168.169.194\",\r\n    \"request\": \"GET / HTTP/1.1\",\r\n    \"status\": 201,\r\n    \"userAgent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:9090/logs/delete",
+					"raw": "http://localhost:9090/api/logs/10",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "9090",
 					"path": [
+						"api",
 						"logs",
-						"delete"
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find-by-ip",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "smartLog2020",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/api/logs/ip/192.168.162.248",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"logs",
+						"ip",
+						"192.168.162.248"
 					]
 				}
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
