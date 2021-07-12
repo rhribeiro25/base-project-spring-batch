@@ -79,8 +79,8 @@ public class LogController {
     }
 
     @GetMapping("/status/{status}")
-    public ResponseEntity<Object> findByStatus(@PathVariable("statusLog") Integer statusLog) {
-        List<LogResponse> logs = logService.findByStatus(statusLog);
+    public ResponseEntity<Object> findByStatus(@PathVariable("status") Integer status) {
+        List<LogResponse> logs = logService.findByStatus(status);
         return new ResponseEntity<>(logs, HttpStatus.OK);
     }
 

@@ -17,6 +17,8 @@ import java.util.Date;
 @Builder
 public class LogResponse {
 
+    private Long id;
+
     private Date createdAt;
 
     private String ip;

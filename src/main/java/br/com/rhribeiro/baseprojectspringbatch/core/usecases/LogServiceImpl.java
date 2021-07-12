@@ -42,6 +42,9 @@ public class LogServiceImpl implements LogService {
     MessageSource messageSource;
 
     @Autowired
+    GenericConverter genericConverter;
+
+    @Autowired
     Job job;
 
     @Autowired
@@ -85,8 +88,8 @@ public class LogServiceImpl implements LogService {
     public LogResponse create(LogCreateRequest logRequest) {
         try {
             logRequest.setCreatedAt(new Date());
-            LogEntity log = logRepository.save(GenericConverter.converterObjectToObject(logRequest, LogEntity.class));
-            return GenericConverter.converterObjectToObject(log, LogResponse.class);
+            LogEntity log = logRepository.save(genericConverter.converterObjectToObject(logRequest, LogEntity.class));
+            return genericConverter.converterObjectToObject(log, LogResponse.class);
         } catch (Exception e) {
             throw new InternalServerErrorException(e.getMessage());
         }
@@ -95,8 +98,8 @@ public class LogServiceImpl implements LogService {
     @Override
     public LogResponse update(LogUpdateRequest logRequest) {
         this.existsById(logRequest.getId());
-        LogEntity log = logRepository.save(GenericConverter.converterObjectToObject(logRequest, LogEntity.class));
-        return GenericConverter.converterObjectToObject(log, LogResponse.class);
+        LogEntity log = logRepository.save(genericConverter.converterObjectToObject(logRequest, LogEntity.class));
+        return genericConverter.converterObjectToObject(log, LogResponse.class);
     }
 
     @Override
@@ -118,25 +121,27 @@ public class LogServiceImpl implements LogService {
     @Override
     public LogResponse findById(Long id) {
         LogEntity log = logRepository.findById(id).orElse(null);
-        return GenericConverter.converterObjectToObject(log, LogResponse.class);
+        if (log != null)
+            return genericConverter.converterObjectToObject(log, LogResponse.class);
+        return null;
     }
 
     @Override
     public List<LogResponse> findAll() {
         List<LogEntity> logs = logRepository.findAll();
-        return GenericConverter.converterListToList(logs, LogResponse.class);
+        return verifyAndReturnLogList(logs);
     }
 
     @Override
     public List<LogResponse> findByIp(String ip) {
         List<LogEntity> logs = logRepository.findLogModelsByIpIsContaining(ip);
-        return GenericConverter.converterListToList(logs, LogResponse.class);
+        return verifyAndReturnLogList(logs);
     }
 
     @Override
     public List<LogResponse> findByStatus(Integer status) {
         List<LogEntity> logs = logRepository.findLogModelsByStatus(status);
-        return GenericConverter.converterListToList(logs, LogResponse.class);
+        return verifyAndReturnLogList(logs);
     }
 
     @Override
@@ -144,7 +149,7 @@ public class LogServiceImpl implements LogService {
         Date dateFrom = DateUtils.stringToDate_yyyy_MM_dd__HH_mm_ss(from);
         Date dateTo = DateUtils.stringToDate_yyyy_MM_dd__HH_mm_ss(to);
         List<LogEntity> logs = logRepository.findLogModelsByCreatedAtBetween(dateFrom, dateTo);
-        return GenericConverter.converterListToList(logs, LogResponse.class);
+        return verifyAndReturnLogList(logs);
     }
 
     private void existsById(Long id) {
@@ -153,6 +158,12 @@ public class LogServiceImpl implements LogService {
             log.error(msg);
             throw new BadRequestErrorException(msg);
         }
+    }
+
+    private List verifyAndReturnLogList(List<LogEntity> logs) {
+        if (logs != null && logs.size() > 0)
+            return genericConverter.converterListToList(logs, LogResponse.class);
+        else return new ArrayList<>();
     }
 
 }

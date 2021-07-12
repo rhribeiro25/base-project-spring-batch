@@ -22,7 +22,6 @@ import java.util.Date;
 @Builder
 public class LogCreateRequest {
 
-    @NotNull
     private Date createdAt;
 
     /************************ Exemplo de Constraint personalizada ************************/

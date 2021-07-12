@@ -25,7 +25,6 @@ public class LogUpdateRequest {
     @NotNull
     private Long id;
 
-    @NotNull
     private Date createdAt;
 
     /************************ Exemplo de Constraint personalizada ************************/

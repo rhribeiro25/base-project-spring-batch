@@ -51,6 +51,13 @@ dependencies {
     // POSTGRESQL CONNECTOR
     runtimeOnly "org.postgresql:postgresql"
 
+    // JUNIT
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.7.0'
+    testImplementation group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.7.0'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
+    testImplementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.7.0'
+
     // TEST DEPENDENCIES
     testImplementation "org.springframework.security:spring-security-test"
     testImplementation "org.springframework.batch:spring-batch-test"
@@ -71,8 +78,7 @@ jacocoTestCoverageVerification {
                 minimum = 0.00
             }
             element = 'CLASS'
-            excludes = ['br.com.rhribeiro25.baseprojectspringwebflux.core.dtos.*',
-                        'br.com.rhribeiro25.baseprojectspringwebflux.dataprovider.apis.viacep.dtos.*']
+            excludes = ['br.com.rhribeiro.baseprojectspringbatch.core.dtos.*']
         }
     }
 }
@@ -84,8 +90,7 @@ jacocoTestReport {
     }
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['br/com/rhribeiro25/baseprojectspringwebflux/core/dtos/*',
-                                        'br/com/rhribeiro25/baseprojectspringwebflux/dataprovider/apis/viacep/dtos/*'])
+            fileTree(dir: it, exclude: ['br/com/rhribeiro25/baseprojectspringbatch/core/dtos/*'])
         }))
     }
 }

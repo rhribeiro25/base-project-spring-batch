@@ -24,6 +24,7 @@ public class IpConstraintValidator implements GeneticConstraint<IpConstraint, St
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (validating(context, (REQUIRE && StringUtils.isNullOrBlank(value)), "{message.error.ip.notblank}")) return false;
         else if(StringUtils.isNotNullAndBlank(value)) {
+            if (validating(context, value.trim().length() < 9, "{message.error.ip.min.size}")) return false;
             if (validating(context, value.trim().length() > 15, "{message.error.ip.max.size}")) return false;
             if (validating(context, !value.matches(IP_FORMAT), "{message.error.ip.pattern}")) return false;
         }
